@@ -161,7 +161,7 @@ bootstrap() {
 
     #Install docker
     sudo DEBIAN_FRONTEND=noninteractive apt-get install -qq apt-transport-https ca-certificates
-    sudo DEBIAN_FRONTEND=noninteractive apt-key adv --keyserver hkp://p80.pool.sks-keyservers.net:80 --recv-keys 58118E89F3A912897C070ADBF76221572C52609D
+    sudo DEBIAN_FRONTEND=noninteractive apt-key adv --keyserver hkp://p80.pool.sks-keyservers.net:80 --recv-keys 58118E89F3A912897C070ADBF76221572C52609D >/dev/null
     sudo echo "deb https://apt.dockerproject.org/repo ubuntu-xenial main" > /tmp/docker.list
     sudo cp /tmp/docker.list /etc/apt/sources.list.d/docker.list
     sudo rm -rf /tmp/docker.list
