@@ -165,9 +165,9 @@ bootstrap() {
     sudo echo "deb https://apt.dockerproject.org/repo ubuntu-xenial main" > /tmp/docker.list
     sudo cp /tmp/docker.list /etc/apt/sources.list.d/docker.list
     sudo rm -rf /tmp/docker.list
-    sudo DEBIAN_FRONTEND=noninteractive apt-get purge -qq lxc-docker
+    sudo DEBIAN_FRONTEND=noninteractive apt-get purge -qqm lxc-docker
     sudo DEBIAN_FRONTEND=noninteractive apt-get update -qq
-    sudo DEBIAN_FRONTEND=noninteractive apt-get install -qq linux-image-extra-$(uname -r) linux-image-extra-virtual
+    sudo DEBIAN_FRONTEND=noninteractive apt-get install -qq linux-image-extra linux-image-extra-virtual
     sudo DEBIAN_FRONTEND=noninteractive apt-get install -qq docker-engine
 
     sudo groupadd docker
