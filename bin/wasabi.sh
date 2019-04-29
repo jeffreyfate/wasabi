@@ -134,11 +134,11 @@ bootstrap() {
     fi
 
     #Install Maven
-    sudo DEBIAN_FRONTEND=noninteractive apt-get update
-    sudo DEBIAN_FRONTEND=noninteractive apt-get install -y maven
+    sudo DEBIAN_FRONTEND=noninteractive apt-get update -qq
+    sudo DEBIAN_FRONTEND=noninteractive apt-get install -qq maven
 
     #Install JAVA
-    sudo DEBIAN_FRONTEND=noninteractive apt-get install -y default-jdk
+    sudo DEBIAN_FRONTEND=noninteractive apt-get install -qq default-jdk
     sudo cp /etc/environment /tmp/environment
     sudo chmod 666 /tmp/environment
     sudo echo "JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64/" >> /tmp/environment
@@ -146,29 +146,29 @@ bootstrap() {
     sudo rm -rf /tmp/environment
 
     #Install git-flow
-    sudo DEBIAN_FRONTEND=noninteractive apt-get install -y git-flow
+    sudo DEBIAN_FRONTEND=noninteractive apt-get install -qq git-flow
 
     #Install Nodejs
     curl -sL https://deb.nodesource.com/setup_6.x | sudo -E bash -
-    sudo DEBIAN_FRONTEND=noninteractive apt-get install -y nodejs
+    sudo DEBIAN_FRONTEND=noninteractive apt-get install -qq nodejs
     sudo npm install -g bower
     sudo npm install -g grunt-cli
     sudo npm install -g yo
 
     #Install compass
-    sudo DEBIAN_FRONTEND=noninteractive apt-get install -y ruby
-    sudo DEBIAN_FRONTEND=noninteractive apt-get install -y ruby-compass
+    sudo DEBIAN_FRONTEND=noninteractive apt-get install -qq ruby
+    sudo DEBIAN_FRONTEND=noninteractive apt-get install -qq ruby-compass
 
     #Install docker
-    sudo DEBIAN_FRONTEND=noninteractive apt-get install -y apt-transport-https ca-certificates
+    sudo DEBIAN_FRONTEND=noninteractive apt-get install -qq apt-transport-https ca-certificates
     sudo DEBIAN_FRONTEND=noninteractive apt-key adv --keyserver hkp://p80.pool.sks-keyservers.net:80 --recv-keys 58118E89F3A912897C070ADBF76221572C52609D
     sudo echo "deb https://apt.dockerproject.org/repo ubuntu-xenial main" > /tmp/docker.list
     sudo cp /tmp/docker.list /etc/apt/sources.list.d/docker.list
     sudo rm -rf /tmp/docker.list
-    sudo DEBIAN_FRONTEND=noninteractive apt-get purge lxc-docker
-    sudo DEBIAN_FRONTEND=noninteractive apt-get update
-    sudo DEBIAN_FRONTEND=noninteractive apt-get install -y linux-image-extra-$(uname -r) linux-image-extra-virtual
-    sudo DEBIAN_FRONTEND=noninteractive apt-get install -y docker-engine
+    sudo DEBIAN_FRONTEND=noninteractive apt-get purge -qq lxc-docker
+    sudo DEBIAN_FRONTEND=noninteractive apt-get update -qq
+    sudo DEBIAN_FRONTEND=noninteractive apt-get install -qq linux-image-extra-$(uname -r) linux-image-extra-virtual
+    sudo DEBIAN_FRONTEND=noninteractive apt-get install -qq docker-engine
 
     sudo groupadd docker
     sudo usermod -aG docker $USER
