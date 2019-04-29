@@ -165,12 +165,16 @@ bootstrap() {
     sudo echo "deb https://apt.dockerproject.org/repo ubuntu-xenial main" > /tmp/docker.list
     sudo cp /tmp/docker.list /etc/apt/sources.list.d/docker.list
     sudo rm -rf /tmp/docker.list
+    sudo DEBIAN_FRONTEND=noninteractive apt-get remove -qq docker docker-engine docker.io containerd runc
     sudo DEBIAN_FRONTEND=noninteractive apt-get purge -qqm lxc-docker
     sudo DEBIAN_FRONTEND=noninteractive apt-get update -qq
-    sudo DEBIAN_FRONTEND=noninteractive apt-get install -qq linux-image-extra linux-image-extra-virtual
-    sudo DEBIAN_FRONTEND=noninteractive apt-get install -qq docker-engine
+    sudo DEBIAN_FRONTEND=noninteractive apt-get install -qq apt-transport-https ca-certificates curl gnupg-agent software-properties-common
+    curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo DEBIAN_FRONTEND=noninteractive apt-key add -
+    sudo DEBIAN_FRONTEND=noninteractive add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"
+    sudo DEBIAN_FRONTEND=noninteractive apt-get update -qq
+    sudo DEBIAN_FRONTEND=noninteractive apt-get install -qq docker-ce docker-ce-cli containerd.io
 
-    sudo groupadd docker
+    # sudo groupadd docker
     sudo usermod -aG docker $USER
     sudo usermod -aG docker root
     echo "${green}installed dependencies.${reset}"
